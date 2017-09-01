@@ -24,6 +24,14 @@
       </button>
       <button
         ion-item
+        (click)="onLoad('CreateSpellPage')"
+        *ngIf="isAuth"
+      >
+        <ion-icon name="add" item-left></ion-icon>
+        Create New Spell
+      </button>
+      <button
+        ion-item
         (click)="onLoad('SpellListPage')"
         *ngIf="isAuth"
       >

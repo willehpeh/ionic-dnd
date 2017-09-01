@@ -8,17 +8,35 @@ export class SpellsService {
   spellList: Spell[];
 
   getSpells() {
-    firebase.database().ref('spells').once('value').then(
-      (snapshot) => {
-        console.log(snapshot);
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('spells/all-spells').orderByKey().once('value').then(
+          (snapshot) => {
+            let childData = [];
+            snapshot.forEach(
+              (childSnapshot) => {
+                childData.push(childSnapshot.val());
+              }
+            );
+            resolve(childData);
+          }, (error) => {
+            reject(error);
+          }
+        );
       }
     );
   }
 
   addNewSpell(spell: Spell) {
-    firebase.database().ref('spells').push(spell).then(
-      (snapshot) => {
-        console.log(snapshot);
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('spells/all-spells').push(spell).then(
+          (snapshot) => {
+            resolve(snapshot);
+          }, (error) => {
+            reject(error);
+          }
+        );
       }
     );
   }

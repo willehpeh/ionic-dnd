@@ -4,11 +4,15 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Spell List Page
+      Spells
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <p>This is my SpellListPage.</p>
+  <ion-list>
+    <button ion-item *ngFor="let spell of spells" (click)="onShowSpell(spell)">
+      <ion-label>{{spell.name}}</ion-label>
+    </button>
+  </ion-list>
 </ion-content>

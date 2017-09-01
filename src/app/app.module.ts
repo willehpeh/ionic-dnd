@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import {AuthService} from "../services/auth.service";
 import {SpellsService} from "../services/spells.service";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import {FormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

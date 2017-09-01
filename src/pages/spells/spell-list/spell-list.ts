@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import {NavController, IonicPage, ModalController} from 'ionic-angular';
+import {SpellsService} from "../../../services/spells.service";
+import {Spell} from "../../../models/spell.model";
 
 @IonicPage()
 @Component({
@@ -8,8 +10,24 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 export class SpellListPage {
 
-  constructor(public navCtrl: NavController) {
+  spells: Spell[];
 
+  constructor(
+    public navCtrl: NavController,
+    public spellsService: SpellsService,
+    public modalCtrl: ModalController) {
   }
 
+  ionViewDidEnter() {
+    this.spellsService.getSpells().then(
+      (data: Spell[]) => {
+        this.spells = data.slice();
+      }
+    );
+  }
+
+  onShowSpell(spell: Spell) {
+    let spellModal = this.modalCtrl.create('SingleSpellPage', {spell: spell});
+    spellModal.present();
+  }
 }

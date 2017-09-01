@@ -1,0 +1,168 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Create Spell Page
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="spellForm">
+    <ion-list>
+      <ion-item-divider>General Information</ion-item-divider>
+      <ion-item>
+        <ion-label stacked>Spell Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Spell School</ion-label>
+        <ion-select formControlName="school">
+          <ion-option value="abjuration">Abjuration</ion-option>
+          <ion-option value="conjuration">Conjuration</ion-option>
+          <ion-option value="divination">Divination</ion-option>
+          <ion-option value="enchantment">Enchantment</ion-option>
+          <ion-option value="evocation">Evocation</ion-option>
+          <ion-option value="illusion">Illusion</ion-option>
+          <ion-option value="necromancy">Necromancy</ion-option>
+          <ion-option value="transmutation">Transmutation</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Level</ion-label>
+        <ion-select formControlName="level">
+          <ion-option value="0">Cantrip</ion-option>
+          <ion-option value="1">1st</ion-option>
+          <ion-option value="2">2nd</ion-option>
+          <ion-option value="3">3rd</ion-option>
+          <ion-option value="4">4th</ion-option>
+          <ion-option value="5">5th</ion-option>
+          <ion-option value="6">6th</ion-option>
+          <ion-option value="7">7th</ion-option>
+          <ion-option value="8">8th</ion-option>
+          <ion-option value="9">9th</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ritual</ion-label>
+        <ion-checkbox formControlName="ritual"></ion-checkbox>
+      </ion-item>
+      <ion-item-divider>Casting Time</ion-item-divider>
+      <ion-item formGroupName="casting">
+        <ion-input type="number" formControlName="amount"></ion-input>
+        <ion-select formControlName="unit">
+          <ion-option value="actions">Actions</ion-option>
+          <ion-option value="minutes">Minutes</ion-option>
+          <ion-option value="hours">Hours</ion-option>
+          <ion-option value="bonus-action">Bonus action</ion-option>
+          <ion-option value="reaction">Reaction</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item-divider>Range</ion-item-divider>
+      <ion-list formGroupName="range">
+        <ion-item>
+          <ion-label>Self</ion-label>
+          <ion-checkbox formControlName="self"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Touch</ion-label>
+          <ion-checkbox formControlName="touch"></ion-checkbox>
+        </ion-item>
+        <ion-item *ngIf="rangeDistanceEnabled">
+          <ion-label stacked>Distance</ion-label>
+          <ion-input type="number" formControlName="distance"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-item-divider>Components</ion-item-divider>
+      <ion-list formGroupName="components">
+        <ion-item>
+          <ion-label>Verbal</ion-label>
+          <ion-checkbox formControlName="verbal"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Somatic</ion-label>
+          <ion-checkbox formControlName="somatic"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Material</ion-label>
+          <ion-checkbox formControlName="material"></ion-checkbox>
+        </ion-item>
+        <ion-item *ngIf="materialTypeEnabled">
+          <ion-label stacked>Material type</ion-label>
+          <ion-input formControlName="materialType"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-item-divider>Duration</ion-item-divider>
+      <ion-list formGroupName="duration">
+        <ion-item>
+          <ion-label>Instantaneous</ion-label>
+          <ion-checkbox formControlName="instantaneous"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Concentration</ion-label>
+          <ion-checkbox formControlName="concentration"></ion-checkbox>
+        </ion-item>
+        <ion-item *ngIf="durationEnabled">
+          <ion-label>Duration</ion-label>
+          <ion-input type="number" formControlName="amount"></ion-input>
+          <ion-select formControlName="unit">
+            <ion-option value="seconds">Seconds</ion-option>
+            <ion-option value="minutes">Minutes</ion-option>
+            <ion-option value="hours">Hours</ion-option>
+            <ion-option value="days">Days</ion-option>
+            <ion-option value="weeks">Weeks</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-item-divider>Description</ion-item-divider>
+      <ion-item>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>At Higher Levels</ion-label>
+        <ion-checkbox formControlName="higherLevel"></ion-checkbox>
+      </ion-item>
+      <ion-item *ngIf="higherLevelsEnabled">
+        <ion-textarea formControlName="higherLevelDescription"></ion-textarea>
+      </ion-item>
+      <ion-item-divider>Available to</ion-item-divider>
+      <ion-list formGroupName="availableTo">
+        <ion-item>
+          <ion-label>Bard</ion-label>
+          <ion-checkbox formControlName="bard"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Cleric</ion-label>
+          <ion-checkbox formControlName="cleric"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Druid</ion-label>
+          <ion-checkbox formControlName="druid"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Paladin</ion-label>
+          <ion-checkbox formControlName="paladin"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ranger</ion-label>
+          <ion-checkbox formControlName="ranger"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Sorcerer</ion-label>
+          <ion-checkbox formControlName="sorcerer"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Warlock</ion-label>
+          <ion-checkbox formControlName="warlock"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Wizard</ion-label>
+          <ion-checkbox formControlName="wizard"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+    <button ion-button block (click)="submitForm()">Submit</button>
+  </form>
+</ion-content>

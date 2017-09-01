@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      {{spell.name}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card padding>
+    <ion-card-header>
+      {{spell.name}}
+      <br>
+      {{spell.level}} level {{spell.school}}
+    </ion-card-header>
+    <ion-card-content>
+      Casting Time: {{spell.casting.amount}} {{spell.casting.unit}}
+      <br>
+      Range:
+        <span *ngIf="spell.range.self">Self</span>
+        <span *ngIf="spell.range.touch">Touch</span>
+        <span *ngIf="!spell.range.self && !spell.range.touch">{{spell.range.distance}} feet</span>
+      <br>
+      Components:
+        <span *ngIf="spell.components.verbal">V, </span>
+        <span *ngIf="spell.components.somatic">S, </span>
+        <span *ngIf="spell.components.material">M ({{spell.components.materialType}})</span>
+      <br>
+      Duration:
+        <span *ngIf="spell.duration.instantaneous">Instantaneous</span>
+        <span *ngIf="spell.duration.concentration">Concentration, up to </span>
+        <span *ngIf="!spell.duration.instantaneous">{{spell.duration.amount}} {{spell.duration.unit}}</span>
+      <p>{{spell.description}}</p>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button full (click)="dismiss()">Close</button>
+</ion-content>
