@@ -26,13 +26,9 @@ export class SignUpPage {
       loading.present();
       this.errorMessage = "";
       this.authService.signup(email, password).then(
-        (data) => {
-          console.log("Data received from Auth Service: ");
-          console.log(data);
+        () => {
           loading.dismiss()
         }, (error) => {
-          console.log("Error received from Auth Service: ");
-          console.log(error);
           this.errorMessage = error.message;
           loading.dismiss();
         }
