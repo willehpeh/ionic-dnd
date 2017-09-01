@@ -27,7 +27,8 @@ export class SignUpPage {
       this.errorMessage = "";
       this.authService.signup(email, password).then(
         () => {
-          loading.dismiss()
+          loading.dismiss();
+          this.navCtrl.setRoot("SpellListPage");
         }, (error) => {
           this.errorMessage = error.message;
           loading.dismiss();
