@@ -12,7 +12,7 @@
 <ion-content padding>
   <ion-list>
     <button ion-item *ngFor="let spell of spells" (click)="onShowSpell(spell)">
-      <ion-label>{{spell.name}}</ion-label>
+      <ion-label>{{spell.spell.name}}</ion-label>
     </button>
   </ion-list>
 </ion-content>

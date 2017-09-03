@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, IonicPage, ModalController} from 'ionic-angular';
+import {NavController, IonicPage, ModalController, LoadingController} from 'ionic-angular';
 import {SpellsService} from "../../../services/spells.service";
 import {Spell} from "../../../models/spell.model";
 
@@ -10,18 +10,24 @@ import {Spell} from "../../../models/spell.model";
 })
 export class SpellListPage {
 
-  spells: Spell[];
+  spells;
 
   constructor(
     public navCtrl: NavController,
     public spellsService: SpellsService,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidEnter() {
+    let loader = this.loadingCtrl.create({
+      content: "Loading spells…"
+    });
+    loader.present();
     this.spellsService.getSpells().then(
-      (data: Spell[]) => {
-        this.spells = data.slice();
+      (data) => {
+        this.spells = data;
+        loader.dismiss();
       }
     );
   }

@@ -5,8 +5,6 @@ import {Spell} from "../models/spell.model";
 @Injectable()
 export class SpellsService {
 
-  spellList: Spell[];
-
   getSpells() {
     return new Promise(
       (resolve, reject) => {
@@ -15,7 +13,9 @@ export class SpellsService {
             let childData = [];
             snapshot.forEach(
               (childSnapshot) => {
-                childData.push(childSnapshot.val());
+                childData.push({
+                  spell: childSnapshot.val(),
+                  id: childSnapshot.key});
               }
             );
             resolve(childData);
@@ -31,6 +31,20 @@ export class SpellsService {
     return new Promise(
       (resolve, reject) => {
         firebase.database().ref('spells/all-spells').push(spell).then(
+          (snapshot) => {
+            resolve(snapshot);
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+  modifySpell(id: string, spell: Spell) {
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('spells/all-spells/' + id).update(spell).then(
           (snapshot) => {
             resolve(snapshot);
           }, (error) => {

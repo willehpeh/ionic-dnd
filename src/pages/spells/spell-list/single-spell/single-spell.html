@@ -1,16 +1,21 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>
       {{spell.name}}
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-card padding>
+    <button ion-button icon-only clear float-right (click)="editSpell()">
+      <ion-icon name="hammer"></ion-icon>
+    </button>
     <ion-card-header>
       {{spell.name}}
       <br>

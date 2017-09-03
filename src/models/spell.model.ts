@@ -25,6 +25,7 @@ export class Spell {
     amount: number
   };
   description: string;
+  higherLevel: boolean;
   higherLevelsDescription: string;
   availableTo: {
     bard: boolean;
